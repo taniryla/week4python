@@ -39,13 +39,13 @@ class BankUser(User):
     def transfer_money(self, receiver_name, amount_to_transfer):
         # pin for the transferring user
         print(
-            f"You are transferring ${amount_to_transfer:,.2f} to {receiver_name}")
+            f"You are transferring ${amount_to_transfer:,.2f} to {receiver_name.name}")
         print("Authentication required")
         user_pin = input("Please enter your PIN number:")
         if user_pin == self.pin:
             print("Transfer authorized")
             print(
-                f"Transferring ${amount_to_transfer:,.2f} to {receiver_name}")
+                f"Transferring ${amount_to_transfer:,.2f} to {receiver_name.name}")
             # balance of the user who is transfering the money
             self.balance -= amount_to_transfer
             # balance of the user who is receiving the money
@@ -57,12 +57,12 @@ class BankUser(User):
     def request_money(self, sender_name, amount_requested):
         # password for the user requesting money
         print(
-            f"You are requesting ${amount_requested:,.2f} from {sender_name}")
-        sender_pin = input(f"Enter {sender_name}'s PIN:")
+            f"You are requesting ${amount_requested:,.2f} from {sender_name.name}")
+        sender_pin = input(f"Enter {sender_name.name}'s PIN:")
         user_password = input("Enter your password:")
         if user_password == self.password and sender_pin == sender_name.pin:
             print("Request authorized")
-            print(f"{sender_name} sent ${amount_requested:,.2f}")
+            print(f"{sender_name.name} sent ${amount_requested:,.2f}")
             self.balance += amount_requested
             sender_name.balance -= amount_requested
             return True
@@ -112,12 +112,10 @@ bankuser3 = BankUser("Bob", "5678", "bob123")
 bankuser2.deposit(5000)
 bankuser2.show_balance()
 bankuser3.show_balance()
-bankuser2.transfer_money(bankuser3, 500)
+test = bankuser2.transfer_money(bankuser3, 500)
 bankuser2.show_balance()
 bankuser3.show_balance()
-"""
-if bankuser2.transfer_money(bankuser3, 500) == True:
-    bankuser3.request_money(bankuser2, 200)
+if test == True:
+    bankuser2.request_money(bankuser3, 200)
 bankuser2.show_balance()
 bankuser3.show_balance()
-"""
