@@ -17,7 +17,7 @@ class Queue:
         print(self.items)
 
 
-class IceCreamShop:
+class IceCreamShop(Queue):
     def __init__(self, flavors):
         self.flavors = flavors
         self.orders = Queue()
@@ -34,9 +34,8 @@ class IceCreamShop:
             print("Choose between 1-3 scoops")
 
     def show_all_orders(self):
-        self.orders = all
-        for i in all:
-            print(f"{all[i]}")
+        for i in orders:
+            print(f"{orders[i]}")
 
     def next_order(self):
         return self.orders.dequeue()
