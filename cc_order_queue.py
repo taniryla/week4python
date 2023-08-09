@@ -20,25 +20,31 @@ class Queue:
 class IceCreamShop(Queue):
     def __init__(self, flavors):
         self.flavors = flavors
-        self.orders = Queue()
+        self.orders = Queue()  # create a queue for the flavor request
 
     def take_order(self, customer, flavor, scoops):
         self.customer = customer
         self.scoops = scoops
-        if flavor in self.flavors and scoops <= 3 and scoops >= 1:
+        if flavor in self.flavors and scoops in range(1, 4):
             print("Order created!")
             order = {"customer": customer, "flavor": flavor, "scoops": scoops}
-            return self.orders.enqueue(order)
-        else:
+            self.orders.enqueue(order)
+        elif (flavor not in self.flavors):
             print("Sorry we don't have that flavor.")
+        elif (scoops not in range(1, 4)):
             print("Choose between 1-3 scoops")
 
     def show_all_orders(self):
-        for i in orders:
-            print(f"{orders[i]}")
+        print("\nAll Pending Ice Orders:")
+        for i in self.orders.items:
+            print("Customer:", i["customer"], "--", "Flavor:",
+                  i["flavor"], "--", "Scoops:", i["scoops"])
 
     def next_order(self):
-        return self.orders.dequeue()
+        print("\nNext Oder Up!")
+        next = self.orders.dequeue()
+        print("Customer:", next["customer"], "--", "Flavor:",
+              next["flavor"], "--", "Scoops:", next["scoops"])
 
 
 shop = IceCreamShop(["rocky road", "mint chip", "pistachio"])
